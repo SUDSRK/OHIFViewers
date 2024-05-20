@@ -1522,10 +1522,8 @@ export default class HangingProtocolService extends PubSubService {
           passed: [],
           failed: [],
         };
-
         matchDetails.passed = matchDetails.passed.concat(seriesMatchDetails.details.passed);
         matchDetails.passed = matchDetails.passed.concat(studyMatchDetails.details.passed);
-
         matchDetails.failed = matchDetails.failed.concat(seriesMatchDetails.details.failed);
         matchDetails.failed = matchDetails.failed.concat(studyMatchDetails.details.failed);
 
@@ -1568,9 +1566,10 @@ export default class HangingProtocolService extends PubSubService {
     matchingScores.sort((a, b) => sortingFunction(a.sortingInfo, b.sortingInfo));
 
     const bestMatch = matchingScores[0];
-
+    // localStorage.setItem('protocolParams', JSON.stringify([bestMatch, matchingScores]));
     console.log('ProtocolEngine::matchImages bestMatch', bestMatch, matchingScores);
-
+    // const data = localStorage.getItem('protocolParams');
+    window.parent.postMessage(bestMatch, 'http://localhost:3001');
     return {
       bestMatch,
       matchingScores,
