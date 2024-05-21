@@ -1564,15 +1564,15 @@ export default class HangingProtocolService extends PubSubService {
       this._getSeriesFieldForDisplaySetSort()
     );
     matchingScores.sort((a, b) => sortingFunction(a.sortingInfo, b.sortingInfo));
-
     const bestMatch = matchingScores[0];
     // localStorage.setItem('protocolParams', JSON.stringify([bestMatch, matchingScores]));
     console.log('ProtocolEngine::matchImages bestMatch', bestMatch, matchingScores);
     // const data = localStorage.getItem('protocolParams');
     window.parent.postMessage(bestMatch, 'http://localhost:3001');
     window.parent.postMessage(bestMatch, 'https://sea-lion-app-fr92d.ondigitalocean.app');
-    window.parent.postMessage(bestMatch, 'http://localhost:3000');
+    window.parent.postMessage(bestMatch, 'https://stingray-app-2mnlj.ondigitalocean.app');
 
+    window.parent.postMessage(bestMatch, 'http://localhost:3000');
     return {
       bestMatch,
       matchingScores,
