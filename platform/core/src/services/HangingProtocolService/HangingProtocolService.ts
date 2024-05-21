@@ -1569,7 +1569,7 @@ export default class HangingProtocolService extends PubSubService {
     // localStorage.setItem('protocolParams', JSON.stringify([bestMatch, matchingScores]));
     console.log('ProtocolEngine::matchImages bestMatch', bestMatch, matchingScores);
     // const data = localStorage.getItem('protocolParams');
-    window.parent.postMessage(bestMatch, 'http://localhost:3001');
+    window.parent.postMessage(bestMatch, 'https://sea-lion-app-fr92d.ondigitalocean.app');
     return {
       bestMatch,
       matchingScores,
