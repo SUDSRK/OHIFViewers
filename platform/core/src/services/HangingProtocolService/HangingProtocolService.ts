@@ -1571,7 +1571,7 @@ export default class HangingProtocolService extends PubSubService {
     window.parent.postMessage(bestMatch, 'http://localhost:3001');
     window.parent.postMessage(bestMatch, 'https://sea-lion-app-fr92d.ondigitalocean.app');
     window.parent.postMessage(bestMatch, 'https://stingray-app-2mnlj.ondigitalocean.app');
-
+    window.parent.postMessage(bestMatch, 'https://lionfish-app-2-nmqsa.ondigitalocean.app');
     window.parent.postMessage(bestMatch, 'http://localhost:3000');
     return {
       bestMatch,
