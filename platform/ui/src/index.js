@@ -127,7 +127,7 @@ export {
   ViewportOverlay,
   MeasurementItem,
   LabellingFlow,
-  HeaderPatientInfo,
+  // HeaderPatientInfo,
   ToolSettings,
   Toolbox,
   InvestigationalUseDialog,
