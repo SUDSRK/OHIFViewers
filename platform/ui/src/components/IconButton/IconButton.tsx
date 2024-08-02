@@ -73,19 +73,19 @@ const fullWidthClasses = {
 };
 
 const IconButton = ({
-  children,
-  variant = 'contained',
-  color = 'default',
-  size = 'medium',
-  rounded = 'medium',
-  disabled = false,
-  type = 'button',
-  fullWidth = false,
-  onClick = () => {},
-  className,
-  id,
-  ...rest
-}) => {
+                      children,
+                      variant = 'contained',
+                      color = 'default',
+                      size = 'medium',
+                      rounded = 'medium',
+                      disabled = false,
+                      type = 'button',
+                      fullWidth = false,
+                      onClick = () => {},
+                      className,
+                      id,
+                      ...rest
+                    }) => {
   const buttonElement = useRef(null);
 
   const handleOnClick = e => {
@@ -104,6 +104,7 @@ const IconButton = ({
         sizeClasses[size],
         fullWidthClasses[fullWidth],
         disabledClasses[disabled],
+        'group',
         className
       )}
       style={{
@@ -116,7 +117,7 @@ const IconButton = ({
       data-tool={rest['data-tool']}
     >
       {React.cloneElement(children, {
-        className: classnames(iconSizeClasses[size], 'fill-current'),
+        className: classnames(iconSizeClasses[size], 'fill-current text-black group-hover:text-white'),
       })}
     </button>
   );

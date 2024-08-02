@@ -13,7 +13,7 @@ const baseClasses = {
   Primary: 'h-full rounded-tl-md rounded-bl-md group/primary',
   Secondary:
     'h-full flex items-center justify-center rounded-tr-md rounded-br-md w-4 border-2 border-transparent group/secondary',
-  SecondaryIcon: 'w-4 h-full stroke-1',
+  SecondaryIcon: 'w-4 h-full stroke-1 text-white',
   Separator: 'border-l py-3 ml-0.5',
   Content: 'absolute z-10 top-0 mt-12',
 };
@@ -22,38 +22,28 @@ const classes = {
   Button: ({ isExpanded }) =>
     classNames(
       baseClasses.Button,
-      !isExpanded && 'hover:!bg-primary-dark hover:border-primary-dark'
+      !isExpanded && 'hover:bg-opacity-20'
     ),
   Interface: 'h-full flex flex-row items-center',
   Primary: ({ isExpanded, isActive }) =>
     classNames(
       baseClasses.Primary,
-      isActive
-        ? isExpanded
-          ? 'border-primary-dark !bg-primary-dark hover:border-primary-dark !text-primary-light'
-          : 'border-primary-light bg-primary-light rounded-md'
-        : `focus:!text-black focus:!rounded-md focus:!border-primary-light focus:!bg-primary-light ${isExpanded ? 'border-primary-dark bg-primary-dark !text-primary-light' : 'border-secondary-dark bg-secondary-dark group-hover/button:border-primary-dark group-hover/button:text-primary-light hover:!bg-primary-dark hover:border-primary-dark focus:!text-black'}`
+      'text-white bg-transparent hover:bg-opacity-20'
     ),
-  Secondary: ({ isExpanded, primary }) =>
+  Secondary: ({ isExpanded }) =>
     classNames(
       baseClasses.Secondary,
-      isExpanded
-        ? 'bg-primary-light !rounded-tr-md !rounded-br-md'
-        : primary.isActive
-          ? 'bg-secondary-dark'
-          : 'hover:bg-primary-dark bg-secondary-dark group-hover/button:border-primary-dark'
+      'text-white bg-transparent hover:bg-opacity-20'
     ),
   SecondaryIcon: ({ isExpanded }) =>
     classNames(
       baseClasses.SecondaryIcon,
-      isExpanded
-        ? 'text-primary-dark'
-        : 'text-primary-active group-hover/secondary:text-primary-light'
+      'text-white hover:text-white'
     ),
-  Separator: ({ primary, isExpanded, isHovering }) =>
+  Separator: ({ isExpanded, isHovering }) =>
     classNames(
       baseClasses.Separator,
-      isHovering || isExpanded || primary.isActive ? 'border-transparent' : 'border-primary-active'
+      'border-transparent'
     ),
   Content: ({ isExpanded }) => classNames(baseClasses.Content, isExpanded ? 'block' : 'hidden'),
 };
@@ -64,16 +54,16 @@ const DefaultListItemRenderer = props => {
     <div
       className={classNames(
         'flex h-8 w-full select-none flex-row items-center p-3',
-        'whitespace-pre text-base',
+        'whitespace-pre text-base text-white',
         className,
-        `${isActive ? 'hover:opacity-80' : 'hover:bg-primary-dark '}`
+        'hover:bg-opacity-20'
       )}
     >
       {icon && (
         <span className="mr-4">
           <Icon
             name={icon}
-            className="h-[28px] w-[28px]"
+            className="h-[28px] w-[28px] text-white"
           />
         </span>
       )}
@@ -87,14 +77,14 @@ const DefaultListItemRenderer = props => {
  * and other interaction props
  */
 const SplitButton = ({
-  groupId,
-  primary,
-  secondary,
-  items,
-  renderer = null,
-  onInteraction,
-  Component = Icon,
-}) => {
+                       groupId,
+                       primary,
+                       secondary,
+                       items,
+                       renderer = null,
+                       onInteraction,
+                       Component = Icon,
+                     }) => {
   const { t } = useTranslation('Buttons');
   const [state, setState] = useState({ isHovering: false, isExpanded: false });
 
@@ -137,9 +127,9 @@ const SplitButton = ({
                 data-cy={`${groupId}-split-button-primary`}
               />
             </div>
-            <div className={classes.Separator({ ...state, primary })}></div>
+            <div className={classes.Separator({ ...state })}></div>
             <div
-              className={classes.Secondary({ ...state, primary })}
+              className={classes.Secondary({ ...state })}
               onClick={toggleExpanded}
               data-cy={`${groupId}-split-button-secondary`}
             >

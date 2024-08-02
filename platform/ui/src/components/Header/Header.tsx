@@ -39,7 +39,7 @@ function Header({
       isSticky={isSticky}
       {...props}
     >
-      <div className="relative h-[48px] bg-white items-center ">
+      <div className="relative h-[48px] bg-black items-center ">
         {/*<div className="absolute left-0 top-1/2 flex -translate-y-1/2 items-center">*/}
         {/*  <div*/}
         {/*    className={classNames(*/}
@@ -57,8 +57,10 @@ function Header({
         {/*    )}*/}
         {/*  </div>*/}
         {/*</div>*/}
-        <div className="absolute top-1/2 left-[250px] bg-white  h-8 -translate-y-1/2">{Secondary}</div>
-        <div className=" bg-white absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform">
+        <div className="absolute top-1/2 left-[250px] h-8 -translate-y-1/2">{Secondary}</div>
+        <div
+          className="bg-[#E2ECFC] text-black absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform rounded-2xl">
+
           <div className="flex items-center justify-center space-x-2">{children}</div>
         </div>
         <div className="absolute right-0 top-1/2 flex -translate-y-1/2 select-none items-center">

@@ -38,7 +38,7 @@ const styleMap = {
 };
 
 const baseClasses =
-  'transition-all duration-300 ease-in-out h-100 bg-black border-black justify-start box-content flex flex-col';
+  'transition-all duration-300 ease-in-out h-100 bg-white border-black justify-start box-content flex flex-col';
 
 const classesMap = {
   open: {
@@ -66,18 +66,16 @@ const position = {
 };
 
 const LegacySidePanel = ({
-  servicesManager,
-  side,
-  className,
-  activeTabIndex: activeTabIndexProp,
-  tabs,
-}: withAppTypes) => {
+                           servicesManager,
+                           side,
+                           className,
+                           activeTabIndex: activeTabIndexProp,
+                           tabs,
+                         }) => {
   const panelService = servicesManager?.services?.panelService;
 
   const { t } = useTranslation('LegacySidePanel');
 
-  // Tracks whether this LegacySidePanel has been opened at least once since this LegacySidePanel was inserted into the DOM.
-  // Thus going to the Study List page and back to the viewer resets this flag for a LegacySidePanel.
   const [hasBeenOpened, setHasBeenOpened] = useState(activeTabIndexProp !== null);
   const [panelOpen, setPanelOpen] = useState(activeTabIndexProp !== null);
   const [activeTabIndex, setActiveTabIndex] = useState(activeTabIndexProp ?? 0);
@@ -148,7 +146,7 @@ const LegacySidePanel = ({
       <>
         <div
           className={classnames(
-            'bg-secondary-dark flex h-[28px] w-full cursor-pointer items-center rounded-md',
+            'bg-white flex h-[28px] w-full cursor-pointer items-center rounded-md',
             side === 'left' ? 'justify-end pr-2' : 'justify-start pl-2'
           )}
           onClick={() => {
@@ -158,7 +156,7 @@ const LegacySidePanel = ({
         >
           <Icon
             name={'navigation-panel-right-reveal'}
-            className={classnames('text-primary-active', side === 'left' && 'rotate-180 transform')}
+            className={classnames('text-black', side === 'left' && 'rotate-180 transform')}
           />
         </div>
         <div className={classnames('mt-3 flex flex-col space-y-3')}>
@@ -177,14 +175,14 @@ const LegacySidePanel = ({
                 variant="text"
                 color="inherit"
                 size="initial"
-                className="text-primary-active"
+                className="text-black"
                 onClick={() => {
                   updateActiveTabIndex(index);
                 }}
               >
                 <Icon
                   name={childComponent.iconName}
-                  className="text-primary-active"
+                  className="text-black"
                   style={{
                     width: '22px',
                     height: '22px',
@@ -205,19 +203,16 @@ const LegacySidePanel = ({
     >
       {panelOpen ? (
         <React.Fragment>
-          {/** Panel Header with Arrow and Close Actions */}
           <div
             className={classnames(
-              'flex-static bg-primary-dark flex h-9 cursor-pointer px-[10px]',
+              'flex-static bg-white flex h-9 cursor-pointer px-[10px]',
               tabs.length === 1 && 'mb-1'
             )}
             onClick={() => {
               updatePanelOpen(prev => !prev);
-              // slideToActivePanel();
             }}
             data-cy={`side-panel-header-${side}`}
           >
-            {/* TODO This should be redesigned to not be a button. */}
             <LegacyButton
               variant="text"
               color="inherit"
@@ -229,13 +224,12 @@ const LegacySidePanel = ({
               <Icon
                 name={openStateIconName[side]}
                 className={classnames(
-                  'text-primary-active absolute',
+                  'text-black absolute',
                   side === 'left' && 'order-last'
                 )}
                 style={{ ...position[side] }}
               />
-              {/* Todo: ass secondary label here */}
-              <span className="text-primary-active">
+              <span className="text-black">
                 {tabs.length === 1 && (t(tabs[activeTabIndex].label) as string)}
               </span>
             </LegacyButton>
@@ -250,17 +244,15 @@ const LegacySidePanel = ({
               activeTabIndex,
               updateActiveTabIndex
             )}
-          {/** carousel navigation with the arrows */}
-          {/** only show carousel nav if tabs are more than 3 tabs */}
           {tabs.length > 3 && (
-            <div className="text-primary-active bg-primary-dark flex w-full justify-end gap-2 py-1 px-2">
+            <div className="text-black bg-white flex w-full justify-end gap-2 py-1 px-2">
               <button
                 ref={prevRef}
                 className="swiper-button-prev-custom"
               >
                 <Icon
                   name={'icon-prev'}
-                  className={classnames('text-primary-active')}
+                  className="text-black"
                 />
               </button>
               <button
@@ -269,7 +261,7 @@ const LegacySidePanel = ({
               >
                 <Icon
                   name={'icon-next'}
-                  className={classnames('text-primary-active')}
+                  className="text-black"
                 />
               </button>
             </div>
@@ -295,7 +287,7 @@ LegacySidePanel.propTypes = {
         iconLabel: PropTypes.string.isRequired,
         name: PropTypes.string.isRequired,
         label: PropTypes.string.isRequired,
-        content: PropTypes.func, // TODO: Should be node, but it keeps complaining?
+        content: PropTypes.func,
       })
     ),
   ]),
@@ -312,10 +304,7 @@ function _getMoreThanOneTabLayout(
 ) {
   return (
     <div
-      className="flex-static collapse-sidebar relative"
-      style={{
-        backgroundColor: '#06081f',
-      }}
+      className="flex-static collapse-sidebar relative bg-white"
     >
       <div className="w-full">
         <Swiper
@@ -336,8 +325,8 @@ function _getMoreThanOneTabLayout(
             <SwiperSlide key={index}>
               <div
                 className={classnames(
-                  index === activeTabIndex ? 'bg-secondary-main text-white' : 'text-aqua-pale',
-                  'flex cursor-pointer flex-col items-center justify-center  rounded-[4px] px-4 py-1 text-center hover:text-white'
+                  'flex cursor-pointer flex-col items-center justify-center rounded-[4px] px-4 py-1 text-center hover:text-black',
+                  index === activeTabIndex ? 'bg-black text-white' : 'text-black'
                 )}
                 key={index}
                 onClick={() => {
@@ -348,9 +337,7 @@ function _getMoreThanOneTabLayout(
                 <span>
                   <Icon
                     name={obj.iconName}
-                    className={classnames(
-                      index === activeTabIndex ? 'text-white' : 'text-primary-active'
-                    )}
+                    className="text-black"
                     style={{
                       width: '22px',
                       height: '22px',

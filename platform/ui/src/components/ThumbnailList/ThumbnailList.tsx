@@ -7,36 +7,36 @@ import ThumbnailTracked from '../ThumbnailTracked';
 import * as Types from '../../types';
 
 const ThumbnailList = ({
-  thumbnails,
-  onThumbnailClick,
-  onThumbnailDoubleClick,
-  onClickUntrack,
-  activeDisplaySetInstanceUIDs = [],
-}) => {
+                         thumbnails,
+                         onThumbnailClick,
+                         onThumbnailDoubleClick,
+                         onClickUntrack,
+                         activeDisplaySetInstanceUIDs = [],
+                       }) => {
   return (
     <div
       id="ohif-thumbnail-list"
-      className="ohif-scrollbar study-min-height overflow-y-hidden bg-black py-5"
+      className="ohif-scrollbar overflow-y-hidden bg-white py-5 h-full"
     >
       {thumbnails.map(
         ({
-          displaySetInstanceUID,
-          description,
-          dragData,
-          seriesNumber,
-          numInstances,
-          modality,
-          componentType,
-          seriesDate,
-          countIcon,
-          isTracked,
-          canReject,
-          onReject,
-          imageSrc,
-          messages,
-          imageAltText,
-          isHydratedForDerivedDisplaySet,
-        }) => {
+           displaySetInstanceUID,
+           description,
+           dragData,
+           seriesNumber,
+           numInstances,
+           modality,
+           componentType,
+           seriesDate,
+           countIcon,
+           isTracked,
+           canReject,
+           onReject,
+           imageSrc,
+           messages,
+           imageAltText,
+           isHydratedForDerivedDisplaySet,
+         }) => {
           const isActive = activeDisplaySetInstanceUIDs.includes(displaySetInstanceUID);
           switch (componentType) {
             case 'thumbnail':
@@ -117,15 +117,7 @@ ThumbnailList.propTypes = {
       description: PropTypes.string,
       componentType: Types.ThumbnailType.isRequired,
       isTracked: PropTypes.bool,
-      /**
-       * Data the thumbnail should expose to a receiving drop target. Use a matching
-       * `dragData.type` to identify which targets can receive this draggable item.
-       * If this is not set, drag-n-drop will be disabled for this thumbnail.
-       *
-       * Ref: https://react-dnd.github.io/react-dnd/docs/api/use-drag#specification-object-members
-       */
       dragData: PropTypes.shape({
-        /** Must match the "type" a dropTarget expects */
         type: PropTypes.string.isRequired,
       }),
     })

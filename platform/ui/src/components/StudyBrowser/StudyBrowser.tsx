@@ -22,17 +22,17 @@ const getTrackedSeries = displaySets => {
 const noop = () => {};
 
 const StudyBrowser = ({
-  tabs,
-  activeTabName,
-  expandedStudyInstanceUIDs,
-  onClickTab = noop,
-  onClickStudy = noop,
-  onClickThumbnail = noop,
-  onDoubleClickThumbnail = noop,
-  onClickUntrack = noop,
-  activeDisplaySetInstanceUIDs,
-  servicesManager,
-}: withAppTypes) => {
+                        tabs,
+                        activeTabName,
+                        expandedStudyInstanceUIDs,
+                        onClickTab = noop,
+                        onClickStudy = noop,
+                        onClickThumbnail = noop,
+                        onDoubleClickThumbnail = noop,
+                        onClickUntrack = noop,
+                        activeDisplaySetInstanceUIDs,
+                        servicesManager,
+                      }) => {
   const { t } = useTranslation('StudyBrowser');
   const { customizationService } = servicesManager?.services || {};
 
@@ -73,10 +73,9 @@ const StudyBrowser = ({
   return (
     <React.Fragment>
       <div
-        className="w-100 border-secondary-light bg-primary-dark flex h-16 flex-row items-center justify-center border-b p-4"
+        className="w-100 border-secondary-light bg-white flex h-16 flex-row items-center justify-center border-b p-4"
         data-cy={'studyBrowser-panel'}
       >
-        {/* TODO Revisit design of LegacyButtonGroup later - for now use LegacyButton for its children.*/}
         <LegacyButtonGroup
           variant="outlined"
           color="secondary"
@@ -86,7 +85,6 @@ const StudyBrowser = ({
             const { name, label, studies } = tab;
             const isActive = activeTabName === name;
             const isDisabled = !studies.length;
-            // Apply the contrasting color for brighter button color visibility
             const classStudyBrowser = customizationService?.getModeCustomization(
               'class:StudyBrowser'
             ) || {
@@ -97,10 +95,10 @@ const StudyBrowser = ({
             return (
               <LegacyButton
                 key={name}
-                className={'min-w-18 p-2 text-base text-white'}
+                className={'min-w-18 p-2 text-base text-black'}
                 size="initial"
                 color={color}
-                bgColor={isActive ? 'bg-primary-main' : 'bg-black'}
+                bgColor={isActive ? 'bg-gray-300' : 'bg-white'}
                 onClick={() => {
                   onClickTab(name);
                 }}
@@ -151,15 +149,7 @@ StudyBrowser.propTypes = {
               componentType: PropTypes.oneOf(['thumbnail', 'thumbnailTracked', 'thumbnailNoImage'])
                 .isRequired,
               isTracked: PropTypes.bool,
-              /**
-               * Data the thumbnail should expose to a receiving drop target. Use a matching
-               * `dragData.type` to identify which targets can receive this draggable item.
-               * If this is not set, drag-n-drop will be disabled for this thumbnail.
-               *
-               * Ref: https://react-dnd.github.io/react-dnd/docs/api/use-drag#specification-object-members
-               */
               dragData: PropTypes.shape({
-                /** Must match the "type" a dropTarget expects */
                 type: PropTypes.string.isRequired,
               }),
             })

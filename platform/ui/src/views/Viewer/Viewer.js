@@ -18,7 +18,7 @@ const Viewer = () => {
             iconName="group-layers"
             iconLabel="Studies"
             componentLabel="Studies"
-            defaultIsOpen={true}
+            defaultIsOpen={false}
           >
             <StudyBrowser />
           </LegacySidePanel>
